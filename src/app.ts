@@ -13,6 +13,7 @@ app.use(cors());
 connectDB();
 // Define a port number
 const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI || ''
 
 //routes go here 
 app.use('/users', userRoutes)
@@ -20,9 +21,7 @@ app.use('/users', userRoutes)
 
 
 export async function connectDB() {
-  const uri =
-    "mongodb+srv://ngdlmk:PX7cddyw83-*-@cluster0.ly9eqte.mongodb.net/?retryWrites=true&w=majority";
-  await mongoose.connect(uri);
+  await mongoose.connect(MONGO_URI);
 }
 
 // Start the server and listen for incoming requests
