@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="add_user">add user</button>
+    <script>
+      const addUser = async (email) => {
+        const url = "http://localhost:9000/users"; // Replace with your server's address if needed
+
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: 'kamil@hello.com',
+              name: 'Hattori Hanzo'
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error ${response.status}`);
+          }
+
+          const savedUser = await response.json();
+          console.log("User saved:", savedUser);
+        } catch (error) {
+          console.error("Error saving the user:", error);
+        }
+      };
+
+      document.getElementById("add_user").onclick = () => {
+        addUser();
+      };
+    </script>
+  </body>
+</html>
